@@ -1,11 +1,24 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import React from 'react';
+import CPCalculator from "@/components/CPCalculator";
+import CPCalculatorHeader from "@/components/CPCalculatorHeader";
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-gray-100 py-8 px-4">
+      <div className="container mx-auto max-w-4xl">
+        <CPCalculatorHeader />
+        <CPCalculator />
+        
+        <div className="mt-8 text-center text-sm text-gray-500">
+          <p>
+            Pokémon GO CP Calculator uses the official formula to calculate Combat Power.
+          </p>
+          <p className="mt-2">
+            Pokémon GO is a trademark of Niantic, Inc. 
+            Pokémon and Pokémon character names are trademarks of Nintendo.
+          </p>
+        </div>
       </div>
     </div>
   );
