@@ -1,69 +1,49 @@
-# Welcome to your Lovable project
 
-## Project info
+# Combat Power Calculator
 
-**URL**: https://lovable.dev/projects/78419cfa-7a8c-4e4f-a3e9-9dc39a88d328
+A comprehensive tool for calculating the Combat Power (CP) of Pokémon in Pokémon GO.
 
-## How can I edit this code?
+## Deployment to Shared Hosting
 
-There are several ways of editing your application.
+### Build Instructions
 
-**Use Lovable**
+1. Run the build command:
+   ```
+   npm run build
+   ```
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/78419cfa-7a8c-4e4f-a3e9-9dc39a88d328) and start prompting.
+2. The build process will create a `dist` folder containing all the production-ready static files.
 
-Changes made via Lovable will be committed automatically to this repo.
+3. Upload all files from the `dist` folder to your shared hosting environment's public directory (often called `public_html`, `www`, or `htdocs`).
 
-**Use your preferred IDE**
+4. Ensure the `.htaccess` file is uploaded to the root directory of your website.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+### Important Files
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+- `index.html`: Main HTML file
+- `.htaccess`: Apache configuration for SPA routing
+- `assets/`: Folder containing all compiled JS, CSS, and media files
+- `robots.txt`: Instructions for search engine crawlers
+- `sitemap.xml`: Site structure information for search engines
 
-Follow these steps:
+### Post-Deployment Checklist
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+- Verify that all pages are accessible through direct URLs
+- Check that all internal links work correctly
+- Test the site on multiple devices and browsers
+- Validate that SEO meta tags are correctly displayed
+- Ensure the Combat Power Calculator functions properly
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## Local Development
 
-# Step 3: Install the necessary dependencies.
-npm i
+1. Install dependencies:
+   ```
+   npm install
+   ```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+2. Start the development server:
+   ```
+   npm run dev
+   ```
 
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/78419cfa-7a8c-4e4f-a3e9-9dc39a88d328) and click on Share -> Publish.
-
-## I want to use a custom domain - is that possible?
-
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+3. Open your browser and navigate to `http://localhost:8080`
