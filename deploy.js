@@ -12,23 +12,105 @@ function ensureDirectoryExistence(filePath) {
   fs.mkdirSync(dirname);
 }
 
+// Verify if dist folder exists, if not tell user to run build
+if (!fs.existsSync('dist')) {
+  console.error('\x1b[31m%s\x1b[0m', 'Build folder not found. Please run "npm run build" first.');
+  console.log('\x1b[33m%s\x1b[0m', 'Run: npm run build');
+  process.exit(1);
+}
+
 // Copy .htaccess to dist folder
 console.log('Copying .htaccess to dist folder...');
 fs.copyFile('.htaccess', 'dist/.htaccess', (err) => {
   if (err) {
-    console.error('Error copying .htaccess:', err);
+    console.error('\x1b[31m%s\x1b[0m', 'Error copying .htaccess:', err);
   } else {
-    console.log('.htaccess copied successfully');
+    console.log('\x1b[32m%s\x1b[0m', '.htaccess copied successfully');
   }
 });
 
-// Verify if dist folder exists
-if (fs.existsSync('dist')) {
-  console.log('Build folder exists. Deployment files prepared successfully.');
-  console.log('\nTo deploy to shared hosting:');
-  console.log('1. Upload all files from the "dist" folder to your web server\'s public directory');
-  console.log('2. Ensure the .htaccess file is included');
-  console.log('3. Set the correct file permissions (typically 644 for files and 755 for directories)');
-} else {
-  console.error('Build folder not found. Please run "npm run build" first.');
+// Copy robots.txt and sitemap.xml to dist folder if they exist
+if (fs.existsSync('public/robots.txt')) {
+  console.log('Copying robots.txt to dist folder...');
+  fs.copyFile('public/robots.txt', 'dist/robots.txt', (err) => {
+    if (err) {
+      console.error('\x1b[31m%s\x1b[0m', 'Error copying robots.txt:', err);
+    } else {
+      console.log('\x1b[32m%s\x1b[0m', 'robots.txt copied successfully');
+    }
+  });
 }
+
+if (fs.existsSync('public/sitemap.xml')) {
+  console.log('Copying sitemap.xml to dist folder...');
+  fs.copyFile('public/sitemap.xml', 'dist/sitemap.xml', (err) => {
+    if (err) {
+      console.error('\x1b[31m%s\x1b[0m', 'Error copying sitemap.xml:', err);
+    } else {
+      console.log('\x1b[32m%s\x1b[0m', 'sitemap.xml copied successfully');
+    }
+  });
+}
+
+// Create a README.txt file in the dist folder with deployment instructions
+const readmeContent = `
+Combat Power Calculator - Deployment Files
+==========================================
+
+These files are ready for deployment to your shared hosting server.
+
+Deployment Instructions:
+------------------------
+
+1. Upload all files and folders from this directory to your web server's public directory
+   (often called 'public_html', 'www', or 'htdocs').
+
+2. Ensure the .htaccess file is included in the upload.
+
+3. Set the correct file permissions:
+   - 644 for files (rw-r--r--)
+   - 755 for directories (rwxr-xr-x)
+
+4. Access your website through your domain name.
+
+Note: This is a Single Page Application (SPA). The .htaccess file is critical
+for ensuring that all routes work correctly.
+
+For any issues, please refer to the project documentation.
+`;
+
+ensureDirectoryExistence('dist/README.txt');
+fs.writeFile('dist/README.txt', readmeContent, (err) => {
+  if (err) {
+    console.error('\x1b[31m%s\x1b[0m', 'Error creating README.txt:', err);
+  } else {
+    console.log('\x1b[32m%s\x1b[0m', 'README.txt created successfully');
+  }
+});
+
+// List all files in the dist folder
+console.log('\n\x1b[36m%s\x1b[0m', 'Files in the dist folder:');
+function listFiles(dir, indent = '') {
+  const files = fs.readdirSync(dir);
+  files.forEach(file => {
+    const filePath = path.join(dir, file);
+    const stats = fs.statSync(filePath);
+    if (stats.isDirectory()) {
+      console.log(`${indent}📁 ${file}`);
+      listFiles(filePath, indent + '  ');
+    } else {
+      console.log(`${indent}📄 ${file}`);
+    }
+  });
+}
+try {
+  listFiles('dist');
+} catch (error) {
+  console.error('\x1b[31m%s\x1b[0m', 'Error listing files:', error);
+}
+
+console.log('\n\x1b[32m%s\x1b[0m', 'Build folder exists. Deployment files prepared successfully.');
+console.log('\n\x1b[33m%s\x1b[0m', 'To deploy to shared hosting:');
+console.log('\x1b[37m%s\x1b[0m', '1. Upload all files from the "dist" folder to your web server\'s public directory');
+console.log('\x1b[37m%s\x1b[0m', '2. Ensure the .htaccess file is included');
+console.log('\x1b[37m%s\x1b[0m', '3. Set the correct file permissions (typically 644 for files and 755 for directories)');

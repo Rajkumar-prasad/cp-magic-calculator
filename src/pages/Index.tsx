@@ -5,7 +5,7 @@ import CPCalculator from '@/components/CPCalculator';
 import { Card, CardContent } from '@/components/ui/card';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Checkbox } from '@/components/ui/checkbox';
-import { ChevronDown, Info, Star, Calculator, Zap, ArrowUp, HelpCircle } from 'lucide-react';
+import { ChevronDown, Info, Star, Calculator, Zap, ArrowUp, HelpCircle, Shield, Trophy, Award, Target, Sparkles } from 'lucide-react';
 
 const Index = () => {
   return (
@@ -40,6 +40,9 @@ const Index = () => {
             <p className="mt-4">
               Whether you're planning evolutions, powering up for specific battle leagues, or simply want to know how strong your Pokémon can become, our <strong>Pokémon GO Calculator</strong> provides the precise information you need.
             </p>
+            <p className="mt-4">
+              The Combat Power (CP) calculation in Pokémon GO uses a complex formula that considers base stats, IVs, and level multipliers. Our <strong>Pokémon GO CP calculator</strong> implements this exact formula to give you results that match what you'll see in the game, helping you make informed decisions about which Pokémon to invest your valuable resources in.
+            </p>
           </div>
         </section>
         
@@ -56,9 +59,14 @@ const Index = () => {
               <li>Wasting valuable stardust and candy on suboptimal Pokémon</li>
               <li>Evolving Pokémon that exceed CP limits for specific battle leagues</li>
               <li>Uncertainty about which Pokémon would become strongest after evolution</li>
+              <li>Difficulty planning effective competitive teams for PvP battles</li>
+              <li>Inability to predict how much CP a Pokémon would gain when powered up</li>
             </ul>
             <p className="mt-4">
               Our team of developers and Pokémon enthusiasts created this <strong>Evolution Calculator for Pokémon GO</strong> to solve these problems. We've built a tool that uses the official CP formula from the game, combined with up-to-date base stats for all Pokémon species.
+            </p>
+            <p className="mt-4">
+              Unlike other calculators, our <strong>Pokémon GO evolution calculator</strong> is regularly updated to include the latest game changes, new Pokémon, and any formula adjustments that Niantic implements. This ensures you always have access to the most accurate calculations possible.
             </p>
           </div>
         </section>
@@ -105,6 +113,90 @@ const Index = () => {
                 </p>
               </CardContent>
             </Card>
+          </div>
+        </section>
+        
+        {/* New Section: Battle League Optimization */}
+        <section className="bg-gradient-to-r from-pogo-blue/10 to-purple-200 rounded-lg shadow-md p-8">
+          <h2 className="text-2xl font-bold mb-6 text-pogo-blue flex items-center gap-2">
+            <Trophy className="h-6 w-6" />
+            Battle League Optimization
+          </h2>
+          
+          <div className="prose max-w-none text-gray-700">
+            <p>
+              The Pokémon GO Battle League has strict CP limits for different competitions. Our <strong>Pokémon GO CP calculator</strong> is an essential tool for competitive trainers looking to optimize their teams for:
+            </p>
+            
+            <div className="grid md:grid-cols-3 gap-6 mt-6">
+              <div className="bg-white p-4 rounded-lg shadow">
+                <h3 className="font-bold text-lg text-pogo-blue mb-2">Great League (1500 CP)</h3>
+                <p className="text-sm">
+                  Calculate the perfect level to power up your Pokémon while staying under the 1500 CP cap. Find the balance between high stats and CP efficiency.
+                </p>
+              </div>
+              
+              <div className="bg-white p-4 rounded-lg shadow">
+                <h3 className="font-bold text-lg text-pogo-red mb-2">Ultra League (2500 CP)</h3>
+                <p className="text-sm">
+                  Determine which Pokémon will reach optimal performance under the 2500 CP limit, and plan your power-ups strategically.
+                </p>
+              </div>
+              
+              <div className="bg-white p-4 rounded-lg shadow">
+                <h3 className="font-bold text-lg text-purple-600 mb-2">Master League (No CP Limit)</h3>
+                <p className="text-sm">
+                  Identify which Pokémon have the highest potential maximum CP to dominate in unlimited CP competitions.
+                </p>
+              </div>
+            </div>
+            
+            <p className="mt-6">
+              Our <strong>Pokémon GO evolution calculator</strong> helps you avoid the frustration of evolving a Pokémon only to discover it exceeds your desired CP limit. By planning ahead, you can build the perfect team for any competitive scenario.
+            </p>
+          </div>
+        </section>
+        
+        {/* New Section: Advanced Features */}
+        <section className="bg-white rounded-lg shadow-md p-8">
+          <h2 className="text-2xl font-bold mb-6 text-pogo-blue flex items-center gap-2">
+            <Sparkles className="h-6 w-6" />
+            Advanced Features of Our Pokémon GO Calculator
+          </h2>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-semibold mb-3 text-pogo-red">Comprehensive Pokémon Database</h3>
+              <p className="text-gray-700 mb-4">
+                Our <strong>Pokémon GO CP calculator</strong> includes data for all available Pokémon in the game, including:
+              </p>
+              <ul className="list-disc pl-6 space-y-1 text-gray-700">
+                <li>All generations of Pokémon currently in Pokémon GO</li>
+                <li>Special forms and regional variants</li>
+                <li>Legendary and Mythical Pokémon</li>
+                <li>Shadow and Purified Pokémon CP calculations</li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="text-xl font-semibold mb-3 text-pogo-blue">Multi-Evolution Planning</h3>
+              <p className="text-gray-700 mb-4">
+                For Pokémon with multiple evolution stages, our <strong>evolution calculator Pokémon GO</strong> tool can:
+              </p>
+              <ul className="list-disc pl-6 space-y-1 text-gray-700">
+                <li>Predict CP at each evolution stage</li>
+                <li>Help you decide whether to power up before or after evolving</li>
+                <li>Compare different evolution paths for Pokémon with branched evolutions</li>
+                <li>Calculate candy and stardust requirements for your planned evolution path</li>
+              </ul>
+            </div>
+          </div>
+          
+          <div className="mt-8 bg-gray-50 p-4 rounded-lg border border-gray-200">
+            <h3 className="text-lg font-semibold mb-2 text-pogo-blue">Did you know?</h3>
+            <p className="text-gray-700">
+              The CP formula in Pokémon GO weighs Attack stats more heavily than Defense or Stamina. This means that Pokémon with high Attack IVs will generally have higher CP values. Our <strong>Pokémon GO IV calculator</strong> takes all these nuances into account to give you the most accurate predictions possible.
+            </p>
           </div>
         </section>
         
@@ -163,6 +255,73 @@ const Index = () => {
                 </p>
               </div>
             </div>
+            
+            <div className="flex items-start gap-3">
+              <Checkbox id="updated" className="mt-1" defaultChecked />
+              <div>
+                <label htmlFor="updated" className="font-medium cursor-pointer">Regularly Updated</label>
+                <p className="text-gray-700 text-sm mt-1">
+                  Our <strong>Pokémon GO calculator</strong> is consistently updated with the latest game changes and new Pokémon releases.
+                </p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-3">
+              <Checkbox id="community" className="mt-1" defaultChecked />
+              <div>
+                <label htmlFor="community" className="font-medium cursor-pointer">Community-Driven</label>
+                <p className="text-gray-700 text-sm mt-1">
+                  Developed by passionate Pokémon GO players who understand what competitive trainers need from an <strong>IV calculator Pokémon GO</strong> tool.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        {/* New Section: Strategy Tips */}
+        <section className="bg-gradient-to-r from-yellow-50 to-amber-100 rounded-lg shadow-md p-8">
+          <h2 className="text-2xl font-bold mb-6 text-amber-700 flex items-center gap-2">
+            <Target className="h-6 w-6" />
+            Strategy Tips for Pokémon GO Players
+          </h2>
+          
+          <div className="prose max-w-none text-gray-700">
+            <p className="mb-4">
+              Our <strong>Pokémon GO CP calculator</strong> helps you make strategic decisions that can significantly impact your gameplay. Here are some valuable tips:
+            </p>
+            
+            <div className="grid md:grid-cols-2 gap-6 mb-6">
+              <div className="bg-white rounded-lg p-4 shadow">
+                <h3 className="font-bold text-lg text-amber-700 mb-2">Great League Strategy</h3>
+                <p className="text-sm">
+                  For the 1500 CP Great League, look for Pokémon with lower Attack IVs but higher Defense and Stamina IVs. This allows you to power up to a higher level while staying under the CP cap, resulting in better overall performance.
+                </p>
+              </div>
+              
+              <div className="bg-white rounded-lg p-4 shadow">
+                <h3 className="font-bold text-lg text-amber-700 mb-2">Resource Management</h3>
+                <p className="text-sm">
+                  Use our <strong>evolve calculator Pokémon GO</strong> before investing stardust and candy. Some Pokémon may not be worth powering up if their maximum CP potential is low compared to alternatives of the same type.
+                </p>
+              </div>
+            </div>
+            
+            <h3 className="text-xl font-semibold mb-3 text-amber-700">Advanced CP Optimization Techniques</h3>
+            
+            <ol className="list-decimal pl-6 space-y-3">
+              <li>
+                <strong>League-Specific IVs:</strong> For Great and Ultra Leagues, use our <strong>Pokémon GO IV calculator</strong> to find the "perfect" IV combinations that maximize stats while staying under CP caps.
+              </li>
+              <li>
+                <strong>Evolution Timing:</strong> Sometimes it's better to power up a Pokémon before evolving it, and sometimes after. Use our <strong>CP calculator Pokémon GO</strong> to determine the most efficient approach.
+              </li>
+              <li>
+                <strong>Shadow Pokémon Evaluation:</strong> Shadow Pokémon have a damage boost but reduced defense. Use our calculator to determine if purifying a Shadow Pokémon is worth the CP and IV changes.
+              </li>
+              <li>
+                <strong>Lucky Pokémon Planning:</strong> Lucky Pokémon require less stardust to power up. Our <strong>Pokémon evolution calculator</strong> can help you prioritize which Lucky Pokémon to invest in based on their CP potential.
+              </li>
+            </ol>
           </div>
         </section>
         
@@ -237,6 +396,49 @@ const Index = () => {
               <CollapsibleContent className="p-4 pt-0 text-gray-700 border-t">
                 <p>
                   Yes, evolving a Pokémon typically increases its CP because evolution changes the Pokémon's base stats (usually making them higher). Our <strong>evolve calculator Pokémon GO</strong> tool can predict exactly how much CP will increase after evolution. The IVs and level remain the same after evolution, but the base stats change, resulting in a different CP calculation.
+                </p>
+              </CollapsibleContent>
+            </Collapsible>
+            
+            <Collapsible className="border rounded-md overflow-hidden">
+              <CollapsibleTrigger className="flex justify-between items-center w-full p-4 text-left font-medium">
+                <span>Can I calculate the CP of Pokémon that aren't in my collection yet?</span>
+                <ChevronDown className="h-5 w-5 shrink-0 transition-transform duration-200" />
+              </CollapsibleTrigger>
+              <CollapsibleContent className="p-4 pt-0 text-gray-700 border-t">
+                <p>
+                  Absolutely! Our <strong>Pokémon GO CP calculator</strong> allows you to input hypothetical IVs and levels for any Pokémon in the game. This is particularly useful for planning which Pokémon to hunt for, or for evaluating the potential of Pokémon from research tasks, raids, or eggs before you obtain them.
+                </p>
+              </CollapsibleContent>
+            </Collapsible>
+            
+            <Collapsible className="border rounded-md overflow-hidden">
+              <CollapsibleTrigger className="flex justify-between items-center w-full p-4 text-left font-medium">
+                <span>How often is the calculator updated with new Pokémon?</span>
+                <ChevronDown className="h-5 w-5 shrink-0 transition-transform duration-200" />
+              </CollapsibleTrigger>
+              <CollapsibleContent className="p-4 pt-0 text-gray-700 border-t">
+                <p>
+                  We strive to update our <strong>Pokémon GO calculator</strong> as quickly as possible whenever new Pokémon are released in the game. Typically, new Pokémon are added to our database within days of their official release. This ensures that our <strong>evolution calculator Pokémon GO</strong> tool remains comprehensive and up-to-date for all trainers.
+                </p>
+              </CollapsibleContent>
+            </Collapsible>
+            
+            <Collapsible className="border rounded-md overflow-hidden">
+              <CollapsibleTrigger className="flex justify-between items-center w-full p-4 text-left font-medium">
+                <span>What's the difference between CP and IV in Pokémon GO?</span>
+                <ChevronDown className="h-5 w-5 shrink-0 transition-transform duration-200" />
+              </CollapsibleTrigger>
+              <CollapsibleContent className="p-4 pt-0 text-gray-700 border-t">
+                <p>
+                  Combat Power (CP) is a calculated value that represents overall battle strength, while Individual Values (IVs) are hidden stats unique to each Pokémon that influence its potential. Our <strong>Pokémon GO IV calculator</strong> helps you understand both:
+                </p>
+                <ul className="list-disc pl-6 mt-2 space-y-1">
+                  <li><strong>CP</strong> is the visible number shown above each Pokémon, calculated using a formula that includes base stats, IVs, and level</li>
+                  <li><strong>IVs</strong> range from 0-15 for each of the three stats (Attack, Defense, Stamina) and represent a Pokémon's individual potential</li>
+                </ul>
+                <p className="mt-2">
+                  Two Pokémon of the same species at the same level can have different CP values because of their different IVs. Our calculator helps you understand this relationship.
                 </p>
               </CollapsibleContent>
             </Collapsible>
