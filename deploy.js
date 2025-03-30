@@ -1,6 +1,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const archiver = require('archiver');
 
 // Function to check if directory exists and create it if not
 function ensureDirectoryExistence(filePath) {
@@ -109,8 +110,35 @@ try {
   console.error('\x1b[31m%s\x1b[0m', 'Error listing files:', error);
 }
 
+// Create a downloadable zip file of the dist folder
+console.log('\n\x1b[36m%s\x1b[0m', 'Creating downloadable zip file...');
+const output = fs.createWriteStream('dist-files.zip');
+const archive = archiver('zip', {
+  zlib: { level: 9 } // Sets the compression level
+});
+
+// Listen for all archive data to be written
+output.on('close', function() {
+  console.log('\x1b[32m%s\x1b[0m', `Successfully created zip file: dist-files.zip (${archive.pointer()} total bytes)`);
+  console.log('\x1b[33m%s\x1b[0m', 'You can now download this zip file and upload it to your hosting provider.');
+});
+
+archive.on('error', function(err) {
+  console.error('\x1b[31m%s\x1b[0m', 'Error creating zip file:', err);
+});
+
+// Pipe archive data to the file
+archive.pipe(output);
+
+// Add the entire dist directory to the archive
+archive.directory('dist/', false);
+
+// Finalize the archive (i.e., finish writing the zip file)
+archive.finalize();
+
 console.log('\n\x1b[32m%s\x1b[0m', 'Build folder exists. Deployment files prepared successfully.');
 console.log('\n\x1b[33m%s\x1b[0m', 'To deploy to shared hosting:');
-console.log('\x1b[37m%s\x1b[0m', '1. Upload all files from the "dist" folder to your web server\'s public directory');
-console.log('\x1b[37m%s\x1b[0m', '2. Ensure the .htaccess file is included');
-console.log('\x1b[37m%s\x1b[0m', '3. Set the correct file permissions (typically 644 for files and 755 for directories)');
+console.log('\x1b[37m%s\x1b[0m', '1. Download the "dist-files.zip" file');
+console.log('\x1b[37m%s\x1b[0m', '2. Extract all files from the zip to your computer');
+console.log('\x1b[37m%s\x1b[0m', '3. Upload all extracted files to your web server\'s public directory');
+console.log('\x1b[37m%s\x1b[0m', '4. Ensure the .htaccess file is included');

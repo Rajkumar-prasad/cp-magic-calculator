@@ -5,11 +5,42 @@ A comprehensive tool for calculating the Combat Power (CP) of Pokémon in Pokém
 
 ## Deployment to Shared Hosting
 
-### Build and Prepare Files
+### For Non-Technical Users
+
+1. Install Node.js from [nodejs.org](https://nodejs.org/) if you haven't already
+
+2. Open a command prompt or terminal:
+   - Windows: Press Windows+R, type "cmd" and press Enter
+   - Mac: Open Terminal from Applications > Utilities
+
+3. Navigate to your project folder (where the files are located)
+
+4. Run these commands one by one:
+   ```
+   npm install archiver
+   npm install
+   npm run build
+   node deploy.js
+   ```
+
+5. After running these commands, you will have a file named `dist-files.zip` in your project folder
+
+6. Download this zip file to your computer
+
+7. Log in to your web hosting control panel (like cPanel)
+
+8. Use the File Manager in your hosting control panel to:
+   - Navigate to your website's public directory (often called "public_html", "www", or "htdocs")
+   - Upload and extract the zip file contents to this directory
+
+9. That's it! Your website should now be live at your domain
+
+### For Technical Users
 
 1. Install dependencies if you haven't already:
    ```
    npm install
+   npm install archiver
    ```
 
 2. Run the build command:
@@ -22,37 +53,13 @@ A comprehensive tool for calculating the Combat Power (CP) of Pokémon in Pokém
    node deploy.js
    ```
 
-4. The build process will create a `dist` folder containing all the production-ready static files, and the deploy script will copy necessary configuration files.
+4. The build process will create a `dist` folder containing all the production-ready static files, and the deploy script will:
+   - Copy necessary configuration files
+   - Create a downloadable zip file of all deployment files called `dist-files.zip`
 
-### Upload Files
+5. Upload the contents of the zip file to your shared hosting environment's public directory
 
-1. Connect to your shared hosting using FTP/SFTP client (like FileZilla, Cyberduck, etc.)
-
-2. Upload all files from the `dist` folder to your shared hosting environment's public directory (often called `public_html`, `www`, or `htdocs`).
-
-3. Important: Make sure the `.htaccess` file is uploaded to the root directory of your website. This file is crucial for proper routing of the single-page application.
-
-### Set Permissions
-
-1. For files: Set permissions to 644 (rw-r--r--)
-2. For directories: Set permissions to 755 (rwxr-xr-x)
-
-Most FTP clients allow you to set these permissions by right-clicking on files or directories.
-
-### DNS and Domain Configuration
-
-1. Point your domain to your hosting provider according to their instructions
-2. If using a subdomain, create the appropriate DNS records
-
-### Post-Deployment Checklist
-
-- Verify that all pages are accessible through direct URLs
-- Check that all internal links work correctly
-- Test the site on multiple devices and browsers
-- Validate that SEO meta tags are correctly displayed
-- Ensure the Combat Power Calculator functions properly
-
-## Important Files for Shared Hosting
+### Important Files for Shared Hosting
 
 - `index.html`: Main HTML file
 - `.htaccess`: Apache configuration for SPA routing
