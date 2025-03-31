@@ -2,6 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 const archiver = require('archiver');
+const { execSync } = require('child_process');
 
 // Function to check if directory exists and create it if not
 function ensureDirectoryExistence(filePath) {
@@ -13,12 +14,29 @@ function ensureDirectoryExistence(filePath) {
   fs.mkdirSync(dirname);
 }
 
-// Verify if dist folder exists, if not tell user to run build
+// Attempt to run the build command if dist folder doesn't exist
 if (!fs.existsSync('dist')) {
-  console.error('\x1b[31m%s\x1b[0m', 'Build folder not found. Please run "npm run build" first.');
-  console.log('\x1b[33m%s\x1b[0m', 'Run: npm run build');
-  process.exit(1);
+  console.log('\x1b[33m%s\x1b[0m', 'Build folder not found. Attempting to run build process...');
+  
+  try {
+    console.log('Installing dependencies...');
+    execSync('npm install', { stdio: 'inherit' });
+    
+    console.log('Running build process...');
+    execSync('npm run build', { stdio: 'inherit' });
+    
+    console.log('\x1b[32m%s\x1b[0m', 'Build completed successfully!');
+  } catch (error) {
+    console.error('\x1b[31m%s\x1b[0m', 'Error during build process:');
+    console.error(error.message);
+    console.log('\x1b[33m%s\x1b[0m', 'Please run the following commands manually:');
+    console.log('1. npm install');
+    console.log('2. npm run build');
+    process.exit(1);
+  }
 }
+
+console.log('Creating deployment package...');
 
 // Copy .htaccess to dist folder
 console.log('Copying .htaccess to dist folder...');
@@ -89,27 +107,6 @@ fs.writeFile('dist/README.txt', readmeContent, (err) => {
   }
 });
 
-// List all files in the dist folder
-console.log('\n\x1b[36m%s\x1b[0m', 'Files in the dist folder:');
-function listFiles(dir, indent = '') {
-  const files = fs.readdirSync(dir);
-  files.forEach(file => {
-    const filePath = path.join(dir, file);
-    const stats = fs.statSync(filePath);
-    if (stats.isDirectory()) {
-      console.log(`${indent}📁 ${file}`);
-      listFiles(filePath, indent + '  ');
-    } else {
-      console.log(`${indent}📄 ${file}`);
-    }
-  });
-}
-try {
-  listFiles('dist');
-} catch (error) {
-  console.error('\x1b[31m%s\x1b[0m', 'Error listing files:', error);
-}
-
 // Create a downloadable zip file of the dist folder
 console.log('\n\x1b[36m%s\x1b[0m', 'Creating downloadable zip file...');
 const output = fs.createWriteStream('dist-files.zip');
@@ -121,6 +118,24 @@ const archive = archiver('zip', {
 output.on('close', function() {
   console.log('\x1b[32m%s\x1b[0m', `Successfully created zip file: dist-files.zip (${archive.pointer()} total bytes)`);
   console.log('\x1b[33m%s\x1b[0m', 'You can now download this zip file and upload it to your hosting provider.');
+  
+  // Get absolute path to the zip file
+  const zipPath = path.resolve('dist-files.zip');
+  console.log('\x1b[32m%s\x1b[0m', `Your zip file is located at: ${zipPath}`);
+  
+  // Try to open the folder containing the zip file
+  try {
+    const command = process.platform === 'win32' 
+      ? `explorer "${path.dirname(zipPath)}"` 
+      : process.platform === 'darwin' 
+        ? `open "${path.dirname(zipPath)}"` 
+        : `xdg-open "${path.dirname(zipPath)}"`;
+    
+    execSync(command);
+    console.log('\x1b[32m%s\x1b[0m', 'Opening folder containing the zip file...');
+  } catch (error) {
+    console.log('\x1b[33m%s\x1b[0m', 'Could not open the folder automatically. Please navigate to the project directory to find the zip file.');
+  }
 });
 
 archive.on('error', function(err) {
@@ -136,9 +151,9 @@ archive.directory('dist/', false);
 // Finalize the archive (i.e., finish writing the zip file)
 archive.finalize();
 
-console.log('\n\x1b[32m%s\x1b[0m', 'Build folder exists. Deployment files prepared successfully.');
-console.log('\n\x1b[33m%s\x1b[0m', 'To deploy to shared hosting:');
-console.log('\x1b[37m%s\x1b[0m', '1. Download the "dist-files.zip" file');
-console.log('\x1b[37m%s\x1b[0m', '2. Extract all files from the zip to your computer');
-console.log('\x1b[37m%s\x1b[0m', '3. Upload all extracted files to your web server\'s public directory');
+console.log('\n\x1b[32m%s\x1b[0m', 'Deployment preparation completed!');
+console.log('\n\x1b[33m%s\x1b[0m', 'IMPORTANT: To deploy to shared hosting:');
+console.log('\x1b[37m%s\x1b[0m', '1. Locate the "dist-files.zip" file in your project folder');
+console.log('\x1b[37m%s\x1b[0m', '2. Upload this zip file to your hosting provider');
+console.log('\x1b[37m%s\x1b[0m', '3. Extract all files on the server to your web server\'s public directory');
 console.log('\x1b[37m%s\x1b[0m', '4. Ensure the .htaccess file is included');
